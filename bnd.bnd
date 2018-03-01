@@ -1,0 +1,5 @@
+Bundle-Name: test-http-liferay
+Bundle-SymbolicName: test.http.liferay
+Bundle-Version: 1.0.0
+Export-Package: test.http.liferay.constants
+Web-ContextPath: /test-http-liferay
