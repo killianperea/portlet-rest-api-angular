@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HeroesHttpStore } from '../stores/heroes-http.store';
+import { HttpStore } from '../stores/http.store';
 
 @Component({
 	selector: 'app',
@@ -7,17 +7,32 @@ import { HeroesHttpStore } from '../stores/heroes-http.store';
 })
 export class AppComponent {
 
-	caption = 'Hello world!';
+	public restTypes: Object[] = [{ label: 'GET', value: 'GET' }, { label: 'POST', value: 'POST' }];
+	public restType: string = 'GET';
+	public urlRequest: string;
+	public payload: string;
+	public response: any;
 
 	constructor(
-		private heroesHttpStore: HeroesHttpStore
+		private httpStore: HttpStore
 	) { }
 
 
 	ngOnInit() {
-		this.heroesHttpStore.getHeroes().subscribe((data) => {
-			console.log(data);
-		})
+	}
+
+	doRequest() {
+		console.log(`${this.restType} + ${this.urlRequest}`);
+		if (this.restType === 'GET') {
+			this.httpStore.getRequest(this.urlRequest).subscribe((data: any) => {
+				this.response = data._body;
+			})
+		} else {
+			this.httpStore.postRequest(this.urlRequest, this.payload).subscribe((data: any) => {
+				this.response = data._body;
+			})
+		}
+
 	}
 
 }

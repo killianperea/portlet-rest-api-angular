@@ -2,22 +2,26 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { NoopAnimationsModule, BrowserAnimationsModule } from './animations/src/animations';
+import { BrowserAnimationsModule } from './animations/src/animations';
 import { Http, RequestOptions, HttpModule } from '@angular/http';
 
 //COMPONENT
 import { AppComponent } from './app.component';
 
 //HTTP 
-import { Api, BASE_URL_SERVER, CATS_API } from '../services/api.service';
-import { HeroesHttpApi } from '../services/heroes-http-service-api';
+import { Api, BASE_URL_SERVER, API } from '../services/api.service';
+import { HttpApi } from '../services/http-service-api';
 
 //STORES
-import { HeroesHttpStore } from '../stores/heroes-http.store';
+import { HttpStore } from '../stores/http.store';
 
 //PRIME NG
-import { } from 'primeng-wl/primeng';
+import { DropdownModule, InputTextModule, ButtonModule, InputTextareaModule } from 'primeng-wl/primeng';
 import 'chart.js/dist/Chart.min';
+import * as Quill from 'quill';
+
+/* Windows adds */
+window['Quill'] = Quill;
 
 
 function apiFactory(http: Http, baseUrl: any, contextUri = '', requestOptions?: RequestOptions) {
@@ -28,21 +32,25 @@ function apiFactory(http: Http, baseUrl: any, contextUri = '', requestOptions?: 
 	imports: [
 		BrowserModule,
 		FormsModule,
-		HttpModule
+		HttpModule,
+		DropdownModule,
+		BrowserAnimationsModule,
+		ButtonModule,
+		InputTextareaModule
 	],
 	declarations: [AppComponent],
 	entryComponents: [AppComponent],
 	bootstrap: [], // Don't bootstrap any component statically (see ngDoBootstrap() below)
 	providers: [
 		// REST
-		{ provide: BASE_URL_SERVER, useValue: 'http://gateway.marvel.com/v1' },
-		{ provide: CATS_API, useFactory: apiFactory, deps: [Http, BASE_URL_SERVER] },
+		{ provide: BASE_URL_SERVER, useValue: '' },
+		{ provide: API, useFactory: apiFactory, deps: [Http, BASE_URL_SERVER] },
 		
 		//API
-		HeroesHttpApi,
+		HttpApi,
 
 		// STORES
-		HeroesHttpStore
+		HttpStore
 
 	],
 	exports: []

@@ -10,39 +10,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-define(["require", "exports", "@angular/core", "@angular/http", "./api.service", "rxjs/add/operator/map"], function (require, exports, core_1, http_1, api_service_1) {
+define(["require", "exports", "@angular/core", "@angular/http", "rxjs/add/operator/map"], function (require, exports, core_1, http_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var HeroesHttpApi = (function () {
-        function HeroesHttpApi(api, defaultOptions) {
-            this.api = api;
+    var HttpApi = (function () {
+        function HttpApi(http, defaultOptions) {
+            this.http = http;
             this.defaultOptions = defaultOptions;
         }
-        HeroesHttpApi.prototype.getHeroes = function () {
+        HttpApi.prototype.getRequest = function (url) {
             var defaultOptions = this.defaultOptions;
             defaultOptions.headers.set('Accept', 'application/json');
-            return this.api.get('public/characters', defaultOptions.merge({
-                params: {
-                    limit: 20,
-                    offset: 0,
-                    ts: 1,
-                    apikey: "01c115c226d5b59b41763a9042339f57",
-                    hash: "bc60ad6d3b45d4124b579413088cb6d5"
-                }
-            }))
-                .map(function (res) { return res.json(); })
-                .map(function (response) { return response.data.results; })
-                .map(function (heroes) { return heroes; });
+            return this.http.get(url)
+                .map(function (res) {
+                return res;
+            });
         };
-        return HeroesHttpApi;
+        HttpApi.prototype.postRequest = function (url, payload) {
+            var defaultOptions = this.defaultOptions;
+            defaultOptions.headers.set('Accept', 'application/json');
+            return this.http.post(url, payload)
+                .map(function (res) {
+                return res;
+            });
+            ;
+        };
+        return HttpApi;
     }());
-    HeroesHttpApi = __decorate([
+    HttpApi = __decorate([
         core_1.Injectable(),
-        __param(0, core_1.Inject(api_service_1.CATS_API)),
         __param(1, core_1.Optional()),
-        __metadata("design:paramtypes", [api_service_1.Api,
+        __metadata("design:paramtypes", [http_1.Http,
             http_1.RequestOptions])
-    ], HeroesHttpApi);
-    exports.HeroesHttpApi = HeroesHttpApi;
+    ], HttpApi);
+    exports.HttpApi = HttpApi;
 });
-//# sourceMappingURL=heroes-http-service-api.js.map
+//# sourceMappingURL=http-service-api.js.map

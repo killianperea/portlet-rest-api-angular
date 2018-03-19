@@ -2,7 +2,7 @@ import { Inject, Injectable, OpaqueToken, Optional } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 
 export const BASE_URL_SERVER = new OpaqueToken('_baseUrlServer');
-export const CATS_API = new OpaqueToken('_catsApi');
+export const API = new OpaqueToken('_api');
 /**
  * Api is a generic REST Api handler. Set your API url first.
  */

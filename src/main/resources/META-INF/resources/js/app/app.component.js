@@ -7,18 +7,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "@angular/core", "../stores/heroes-http.store"], function (require, exports, core_1, heroes_http_store_1) {
+define(["require", "exports", "@angular/core", "../stores/http.store"], function (require, exports, core_1, http_store_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var AppComponent = (function () {
-        function AppComponent(heroesHttpStore) {
-            this.heroesHttpStore = heroesHttpStore;
-            this.caption = 'Hello world!';
+        function AppComponent(httpStore) {
+            this.httpStore = httpStore;
+            this.restTypes = [{ label: 'GET', value: 'GET' }, { label: 'POST', value: 'POST' }];
+            this.restType = 'GET';
         }
         AppComponent.prototype.ngOnInit = function () {
-            this.heroesHttpStore.getHeroes().subscribe(function (data) {
-                console.log(data);
-            });
+        };
+        AppComponent.prototype.doRequest = function () {
+            var _this = this;
+            console.log(this.restType + " + " + this.urlRequest);
+            if (this.restType === 'GET') {
+                this.httpStore.getRequest(this.urlRequest).subscribe(function (data) {
+                    _this.response = data._body;
+                });
+            }
+            else {
+                this.httpStore.postRequest(this.urlRequest, this.payload).subscribe(function (data) {
+                    _this.response = data._body;
+                });
+            }
         };
         return AppComponent;
     }());
@@ -27,7 +39,7 @@ define(["require", "exports", "@angular/core", "../stores/heroes-http.store"], f
             selector: 'app',
             templateUrl: '/o/test-http-liferay/js/app/app.html'
         }),
-        __metadata("design:paramtypes", [heroes_http_store_1.HeroesHttpStore])
+        __metadata("design:paramtypes", [http_store_1.HttpStore])
     ], AppComponent);
     exports.AppComponent = AppComponent;
 });

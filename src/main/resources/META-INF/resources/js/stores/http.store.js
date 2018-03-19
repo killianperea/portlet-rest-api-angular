@@ -7,22 +7,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "@angular/core", "../services/heroes-http-service-api"], function (require, exports, core_1, heroes_http_service_api_1) {
+define(["require", "exports", "@angular/core", "../services/http-service-api"], function (require, exports, core_1, http_service_api_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var HeroesHttpStore = (function () {
-        function HeroesHttpStore(heroesHttpApi) {
-            this.heroesHttpApi = heroesHttpApi;
+    var HttpStore = (function () {
+        function HttpStore(httpApi) {
+            this.httpApi = httpApi;
         }
-        HeroesHttpStore.prototype.getHeroes = function () {
-            return this.heroesHttpApi.getHeroes();
+        HttpStore.prototype.getRequest = function (url) {
+            return this.httpApi.getRequest(url);
         };
-        return HeroesHttpStore;
+        HttpStore.prototype.postRequest = function (url, payload) {
+            return this.httpApi.postRequest(url, payload);
+        };
+        return HttpStore;
     }());
-    HeroesHttpStore = __decorate([
+    HttpStore = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [heroes_http_service_api_1.HeroesHttpApi])
-    ], HeroesHttpStore);
-    exports.HeroesHttpStore = HeroesHttpStore;
+        __metadata("design:paramtypes", [http_service_api_1.HttpApi])
+    ], HttpStore);
+    exports.HttpStore = HttpStore;
 });
-//# sourceMappingURL=heroes-http.store.js.map
+//# sourceMappingURL=http.store.js.map

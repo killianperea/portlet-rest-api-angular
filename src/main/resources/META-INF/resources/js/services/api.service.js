@@ -14,7 +14,7 @@ define(["require", "exports", "@angular/core", "@angular/http"], function (requi
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.BASE_URL_SERVER = new core_1.OpaqueToken('_baseUrlServer');
-    exports.CATS_API = new core_1.OpaqueToken('_catsApi');
+    exports.API = new core_1.OpaqueToken('_api');
     /**
      * Api is a generic REST Api handler. Set your API url first.
      */

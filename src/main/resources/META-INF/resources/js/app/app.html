@@ -1,1 +1,21 @@
-{{caption}}
+<div class="ui-g">
+    <div class="ui-g" style="margin: 5px;">
+        <p-dropdown [options]="restTypes" [(ngModel)]="restType"></p-dropdown>
+    </div>
+    <div class="ui-g" style="margin: 5px;">
+        <input type="text" pInputText [(ngModel)]="urlRequest" placeholder="http://" />
+    </div>
+    <div class="ui-g" style="margin: 5px;">
+        <p-button label="Go!" (onClick)="doRequest()"></p-button>
+    </div>
+</div>
+<div class="ui-g">
+    <div class="ui-g" style="margin: 5px;" *ngIf="restType === 'POST'">
+        <p>Payload:</p>
+        <textarea pInputTextarea [(ngModel)]="payload" [rows]="5" [cols]="50"></textarea>
+    </div>
+</div>
+<div *ngIf="response" class="ui-g" style="margin: 5px;">
+    <p>Response:</p>
+    <div>{{response}}</div>
+</div>
